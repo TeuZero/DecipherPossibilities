@@ -2,7 +2,7 @@
 #include <string.h>
 
 
-void generateCombinations(FILE* input, FILE* output, int tamanho) {
+void generateCombinations(FILE* input, FILE* output) {
     int encryptedValue;
     char decrypted[256];
     int decrypted2[256];
@@ -95,7 +95,7 @@ void removeDuplicates(FILE* input, FILE* output) {
     }
 }
 
-void performOperation(const char* option, const char* inputFile, const char* outputFile, int tamanho) {
+void performOperation(const char* option, const char* inputFile, const char* outputFile) {
     FILE* input;
     FILE* output;
 
@@ -104,7 +104,7 @@ void performOperation(const char* option, const char* inputFile, const char* out
     }
 
     if (strcmp(option, "generateCombinations") == 0)
-        generateCombinations(input, output, tamanho);
+        generateCombinations(input, output);
     else if (strcmp(option, "removeDuplicates") == 0)
         removeDuplicates(input, output);
     else
@@ -118,16 +118,16 @@ void performOperation(const char* option, const char* inputFile, const char* out
 
 
 int main(int argc, char* argv[]) {
-    if (argc != 5) {
-        fprintf(stderr, ": %s <generateCombinations/removeDuplicates> <input_file> <output_file> <tamanho_da_chave> \n", argv[0]);
+    if (argc != 4) {
+        fprintf(stderr, ": %s <generateCombinations/removeDuplicates> <input_file> <output_file> \n", argv[0]);
         return 1;
     }
 
     const char* option = argv[1];
     const char* inputFile = argv[2];
     const char* outputFile = argv[3];
-    int tamanho = atoi(argv[4]);
+  
 
-    performOperation(option, inputFile, outputFile, tamanho);
+    performOperation(option, inputFile, outputFile);
     return 0;
 }
