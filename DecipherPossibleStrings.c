@@ -77,6 +77,7 @@ void combinations(FILE* input, FILE* output) {
     int decryptedValue;
     char combination[256];
     int decrypted2[256];
+    int decrypted3[256];
     char combinedResults[256] = "";
 
     printf("Aguarde enquanto o programa esta combinando os resultados.\n");
@@ -89,12 +90,15 @@ void combinations(FILE* input, FILE* output) {
                 for (int k = 0; k < 256; k++) {
                     combination[0] = (char)(decryptedValue - i);
                     decrypted2[0] = i + j + k;
-					                  
+					decrypted3[0] = i - j - k;                 
                         char tempBuffer[50];
-                        sprintf(tempBuffer, "%c%c%c", decryptedValue, decrypted2[0], combination[0]);
-
+                        sprintf(tempBuffer, "%c%c%c-%c%c%c",   decryptedValue,decrypted2[0] ,combination[0],decrypted3[0], decrypted2[0], decrypted3[0]);
+						
 						printf("%s\n", tempBuffer);
-						fprintf(output, "%s\n", tempBuffer);                
+						fprintf(output, "%s\n", tempBuffer);    
+						
+						if(decryptedValue !=  decryptedValue)
+							break;            
                 	}
             	}
         	}
