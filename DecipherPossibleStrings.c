@@ -36,7 +36,7 @@ int isDuplicate(const char* buffer, const char* combination) {
     const char* ptr = buffer;
 
     while (*ptr != '\0') {
-        if (strcmp(ptr, combination) == 0) {
+        if (strstr(ptr, combination) != NULL) {
             return 1;  // Duplicado encontrado
         }
         // Avança para o próximo conjunto de caracteres
@@ -73,7 +73,7 @@ void removeDuplicates(FILE* input, FILE* output) {
 }
 
 
-void combinations(FILE *input, FILE *output) {
+void combinations(FILE* input, FILE* output) {
     int decryptedValue;
     char combination[256];
     int decrypted2[256];
@@ -89,27 +89,20 @@ void combinations(FILE *input, FILE *output) {
                 for (int k = 0; k < 256; k++) {
                     combination[0] = (char)(decryptedValue - i);
                     decrypted2[0] = i + j + k;
-
-                    if (decrypted2[0] == decryptedValue) {
+					                  
                         char tempBuffer[50];
                         sprintf(tempBuffer, "%c%c%c", decryptedValue, decrypted2[0], combination[0]);
 
-                        // Verifica se a combinação já existe no buffer
-                        if (!isDuplicate(combinedResults, tempBuffer)) {
-                            // Adiciona a combinação ao buffer
-                            char *ptrCombinedResults = combinedResults + strlen(combinedResults);
-                            strcpy(ptrCombinedResults, tempBuffer);
-                            fprintf(output, "%s\n", tempBuffer);
-                            printf("%s\n", tempBuffer);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+						printf("%s\n", tempBuffer);
+						fprintf(output, "%s\n", tempBuffer);                
+                	}
+            	}
+        	}
+   	 }
+   	 
     printf("Combinacoes concluidas.\n");
 }
+
 
 int openFiles(const char* inputFile, const char* outputFile, FILE** input, FILE** output) {
     *input = fopen(inputFile, "rb");
