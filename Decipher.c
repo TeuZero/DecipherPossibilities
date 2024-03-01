@@ -116,18 +116,16 @@ void performOperation(const char* option, const char* inputFile, const char* out
     printf("Operaçao completa.\n");
 }
 
-
 int main(int argc, char* argv[]) {
     if (argc != 4) {
         fprintf(stderr, ": %s <generateCombinations/removeDuplicates> <input_file> <output_file> \n", argv[0]);
         return 1;
     }
-
+    
     const char* option = argv[1];
     const char* inputFile = argv[2];
     const char* outputFile = argv[3];
-  
-
+    
     performOperation(option, inputFile, outputFile);
     return 0;
 }
