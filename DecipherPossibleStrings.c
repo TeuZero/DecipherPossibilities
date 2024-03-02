@@ -4,7 +4,7 @@
 void generateCNumbers(FILE* input, FILE* output, int maxDigits) {
     char characters[256];
     char currentCombination[256];
-
+	printf("O Programa esta combinando, aguarde pode demorar.\n");
     // Ler os caracteres do arquivo de entrada
     int characterCount = 0;
     while (fscanf(input, " %c", &characters[characterCount]) == 1) {
@@ -210,7 +210,7 @@ int openFiles(const char* inputFile, const char* outputFile, FILE** input, FILE*
     return 1;
 }
 
-int performOperation(const char* option, const char* inputFile, const char* outputFile) {
+int performOperation(const char* option, const char* inputFile, const char* outputFile, int maxDigits) {
     FILE* input;
     FILE* output;
 
@@ -230,7 +230,7 @@ int performOperation(const char* option, const char* inputFile, const char* outp
 		generates(input, output);
 	}else if(strcmp(option, "generateCNumbers") == 0){
 		generateCNumbers(input, output, maxDigits);
-		printf("Exemplo: %c generateCNumbers <input_file> <output_file> <maximoDeDigitos> ", argv[0])
+		printf("Exemplo: bruteforce.exe generateCNumbers <input_file> <output_file> <maximoDeDigitos> ");
 		
 	}else{
 	    printf("Opcao nao reconhecida.\n");
@@ -245,15 +245,16 @@ int performOperation(const char* option, const char* inputFile, const char* outp
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 4) {
-        fprintf(stderr, "%s <generateCombinations/removeDuplicates/combinations/generates/generateCNumbers> <input_file> <output_file> \n", argv[0]);
+    if (argc != 5) {
+        fprintf(stderr, "%s <generateCombinations/removeDuplicates/combinations/generates/generateCNumbers> <input_file> <output_file> <maxDigitsSóvaleparafuncao generateCNumbers> \n", argv[0]);
         return 1;
     }
     
     const char* option = argv[1];
     const char* inputFile = argv[2];
     const char* outputFile = argv[3];
+    int maxDigits = atoi(argv[4]);
     
-    performOperation(option, inputFile, outputFile);
+    performOperation(option, inputFile, outputFile, maxDigits);
     return 0;
 }
