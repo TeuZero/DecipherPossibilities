@@ -79,34 +79,34 @@ void combinations(FILE* input, FILE* output) {
     int decrypted2[256];
     int decrypted3[256];
     char combinedResults[256] = "";
-    int init;
+   	int init;
 
     printf("Aguarde enquanto o programa esta combinando os resultados.\n");
     printf("Isso pode levar um tempo...\n");
-
+		
     while (fscanf(input, "%c", &decryptedValue) > 0) {
-		init = decryptedValue; 
+		 
         for (int i = 0; i < 256; i++) {
+ 
             for (int j = 0; j < 256; j++) {
                 for (int k = 0; k < 256; k++) {
                     combination[0] = (char)(decryptedValue - i);
                     decrypted2[0] = i + j + k;
 		            decrypted3[0] = i + j - k;                 
                     char tempBuffer[50];
-                    sprintf(tempBuffer, "%c%c%c-%c%c",   decryptedValue,decrypted2[0] ,combination[0] ,combination[0], decrypted2[0]);
+                    sprintf(tempBuffer, "%c%c-%c%c", decryptedValue,combination[0] ,decrypted2[0] ,decrypted3[0]);
 						
-			        printf("%s\n", tempBuffer);
+			        //printf("%s\n", tempBuffer);
 			        fprintf(output, "%s\n", tempBuffer);    
-						
-			if(decryptedValue != init )
-			break;            
-                	}
-            	  }
+					printf("Decrypted Text: %c%c - %c%c\n", decryptedValue,combination[0] ,decrypted2[0],decrypted3[0] );	
+
+				}					
             }
-       }
-   	 
-    printf("Combinacoes concluidas.\n");
+        }
+    }
 }
+   	 
+ 
 
 
 int openFiles(const char* inputFile, const char* outputFile, FILE** input, FILE** output) {
