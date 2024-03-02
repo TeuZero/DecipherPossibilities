@@ -1,6 +1,76 @@
 #include <stdio.h>
 #include <string.h>
 
+void generateCNumbers(FILE* input, FILE* output, int maxDigits) {
+    char characters[256];
+    char currentCombination[256];
+
+    // Ler os caracteres do arquivo de entrada
+    int characterCount = 0;
+    while (fscanf(input, " %c", &characters[characterCount]) == 1) {
+        characterCount++;
+    }
+
+    // Função recursiva para gerar combinações
+    void generate(int position, int digits) {
+        if (digits > maxDigits) {
+            // Chegamos ao número máximo de dígitos, pular para uma nova linha
+            fprintf(output, "\n");
+            return;
+        }
+
+        if (position == characterCount) {
+            // Chegamos ao final da combinação, gravar no arquivo
+            fprintf(output, "%s ", currentCombination);
+            generate(0, digits + 1);  // Reiniciar a partir da posição 0 com mais um dígito
+            return;
+        }
+
+        // Para cada caractere, incluir na combinação e chamar a função recursivamente
+        for (int i = 0; i < characterCount; i++) {
+            currentCombination[position] = characters[i];
+            generate(position + 1, digits);
+        }
+    }
+
+    // Iniciar a geração a partir da posição 0 e com 1 dígito
+    generate(0, 1);
+}
+
+
+
+void generates(FILE* input, FILE* output) {
+    char characters[256];
+    char currentCombination[256];
+	
+	printf("Aguarde o programa esta gerando as combinacoes isso ira levar tempo...\n");
+    // Ler os caracteres do arquivo de entrada
+    int characterCount = 0;
+    while (fscanf(input, " %c", &characters[characterCount]) == 1) {
+        characterCount++;
+    }
+
+    // Função recursiva para gerar combinações
+    void generate(int position) {
+        if (position == characterCount) {
+            // Chegamos ao final da combinação, gravar no arquivo
+            fprintf(output, "%s\n", currentCombination);
+            return;
+        }
+
+        // Para cada caractere, incluir na combinação e chamar a função recursivamente
+        for (int i = 0; i < characterCount; i++) {
+            currentCombination[position] = characters[i];
+            generate(position + 1);
+        }
+    }
+
+    // Iniciar a geração a partir da posição 0
+    generate(0);
+    printf("Geracoes concluidas com sucesso!\n");
+}
+
+
 void generateCombinations(FILE* input, FILE* output) {
     int encryptedValue;
     char decrypted[256];
@@ -22,25 +92,25 @@ void generateCombinations(FILE* input, FILE* output) {
                     // Verifica se a condição é verdadeira
                     if (decrypted2[0] == encryptedValue) {
                         printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
-                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c %c \n", decrypted2[0], decrypted[0]);
                     }
                     decrypted[0] = (char)(encryptedValue -(char)"") - 15;
                     
 					if (decrypted2[0] == encryptedValue) {
                         printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
-                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c %c \n", decrypted2[0], decrypted[0]);
                     }
                          
                       decrypted[0] = (char)(encryptedValue + i) + (25 + 29 );     
                     if (decrypted2[0] == encryptedValue) {
                         printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
-                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c %c \n", decrypted2[0], decrypted[0]);
                     }
                     
                     decrypted[0] = (char)(encryptedValue ^ i);     
                     if (decrypted2[0] == encryptedValue) {
                         printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
-                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c %c \n", decrypted2[0], decrypted[0]);
                     }
                 }
             }
@@ -156,7 +226,13 @@ int performOperation(const char* option, const char* inputFile, const char* outp
 	    combinations(input, output);
 	} else if (strcmp(option, "removeDuplicates") == 0) {
 	    removeDuplicates(input, output);
-	} else {
+	} else if(strcmp(option, "generates") == 0){
+		generates(input, output);
+	}else if(strcmp(option, "generateCNumbers") == 0){
+		generateCNumbers(input, output, maxDigits);
+		printf("Exemplo: %c generateCNumbers <input_file> <output_file> <maximoDeDigitos> ", argv[0])
+		
+	}else{
 	    printf("Opcao nao reconhecida.\n");
 	    fclose(input);
 	    fclose(output);
@@ -170,7 +246,7 @@ int performOperation(const char* option, const char* inputFile, const char* outp
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
-        fprintf(stderr, ": %s <generateCombinations/removeDuplicates/combinations> <input_file> <output_file> \n", argv[0]);
+        fprintf(stderr, ": %s <generateCombinations/removeDuplicates/combinations/generates/generateCNumbers> <input_file> <output_file> \n", argv[0]);
         return 1;
     }
     
