@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 void generateCombinations(FILE* input, FILE* output) {
     int encryptedValue;
     char decrypted[256];
@@ -22,19 +21,25 @@ void generateCombinations(FILE* input, FILE* output) {
 
                     // Verifica se a condição é verdadeira
                     if (decrypted2[0] == encryptedValue) {
-                        printf("Decrypted Text: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
+                        printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
                         fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
                     }
                     decrypted[0] = (char)(encryptedValue -(char)"") - 15;
                     
 					if (decrypted2[0] == encryptedValue) {
-                        printf("Decrypted Text: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
+                        printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
                         fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
                     }
                          
                       decrypted[0] = (char)(encryptedValue + i) + (25 + 29 );     
                     if (decrypted2[0] == encryptedValue) {
-                        printf("Decrypted Text: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
+                        printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                    }
+                    
+                    decrypted[0] = (char)(encryptedValue ^ i);     
+                    if (decrypted2[0] == encryptedValue) {
+                        printf("Decrypted char: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
                         fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
                     }
                 }
@@ -84,7 +89,7 @@ void removeDuplicates(FILE* input, FILE* output) {
     printf("Duplicatas removidas.\n");
 }
 
-
+// Essa função combinations está em teste
 void combinations(FILE* input, FILE* output) {
     int decryptedValue;
     char combination[256];
@@ -117,8 +122,6 @@ void combinations(FILE* input, FILE* output) {
 }
    	 
  
-
-
 int openFiles(const char* inputFile, const char* outputFile, FILE** input, FILE** output) {
     *input = fopen(inputFile, "rb");
     *output = fopen(outputFile, "wb");
@@ -136,8 +139,6 @@ int openFiles(const char* inputFile, const char* outputFile, FILE** input, FILE*
 
     return 1;
 }
-
-
 
 int performOperation(const char* option, const char* inputFile, const char* outputFile) {
     FILE* input;
