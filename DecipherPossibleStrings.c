@@ -93,10 +93,10 @@ void combinations(FILE* input, FILE* output) {
                     decrypted2[0] = i + j + k;
 		            decrypted3[0] = i + j - k;                 
                     char tempBuffer[50];
-                    sprintf(tempBuffer, "%c%c%c-%c%c%c",   decryptedValue,decrypted2[0] ,combination[0],decryptedValue ,combination[0], decrypted2[0]);
+                    sprintf(tempBuffer, "%c%c%c-%c%c",   decryptedValue,decrypted2[0] ,combination[0] ,combination[0], decrypted2[0]);
 						
-			printf("%s\n", tempBuffer);
-			fprintf(output, "%s\n", tempBuffer);    
+			        printf("%s\n", tempBuffer);
+			        fprintf(output, "%s\n", tempBuffer);    
 						
 			if(decryptedValue != init )
 			break;            
