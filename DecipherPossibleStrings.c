@@ -246,7 +246,7 @@ int performOperation(const char* option, const char* inputFile, const char* outp
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
-        fprintf(stderr, ": %s <generateCombinations/removeDuplicates/combinations/generates/generateCNumbers> <input_file> <output_file> \n", argv[0]);
+        fprintf(stderr, "%s <generateCombinations/removeDuplicates/combinations/generates/generateCNumbers> <input_file> <output_file> \n", argv[0]);
         return 1;
     }
     
