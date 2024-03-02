@@ -17,10 +17,22 @@ void generateCombinations(FILE* input, FILE* output) {
         for (int i = 0; i < 256; i++) {
             for (int j = 0; j < 256; j++) {
                 for (int k = 0; k < 256; k++) {
-                    decrypted[0] = (char)(encryptedValue - i);
+                    decrypted[0] = (char)(encryptedValue + i) ;
                     decrypted2[0] = i + j + k;
 
                     // Verifica se a condição é verdadeira
+                    if (decrypted2[0] == encryptedValue) {
+                        printf("Decrypted Text: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                    }
+                    decrypted[0] = (char)(encryptedValue -(char)"") - 15;
+                    
+					if (decrypted2[0] == encryptedValue) {
+                        printf("Decrypted Text: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
+                        fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
+                    }
+                         
+                      decrypted[0] = (char)(encryptedValue + i) + (25 + 29 );     
                     if (decrypted2[0] == encryptedValue) {
                         printf("Decrypted Text: %c - %c  - %c\n", encryptedValue, decrypted2[0], decrypted[0]);
                         fprintf(output, "%c - %c \n", decrypted2[0], decrypted[0]);
@@ -87,18 +99,16 @@ void combinations(FILE* input, FILE* output) {
     while (fscanf(input, "%c", &decryptedValue) > 0) {
 		 
         for (int i = 0; i < 256; i++) {
- 
             for (int j = 0; j < 256; j++) {
                 for (int k = 0; k < 256; k++) {
                     combination[0] = (char)(decryptedValue - i);
-                    decrypted2[0] = i + j + k;
-		            decrypted3[0] = i + j - k;                 
+                    decrypted2[0] = i + j + k;                
                     char tempBuffer[50];
-                    sprintf(tempBuffer, "%c%c-%c%c", decryptedValue,combination[0] ,decrypted2[0] ,decrypted3[0]);
+                    sprintf(tempBuffer, "%c-%c%c", decryptedValue,combination[0] ,decrypted2[0] );
 						
 			        //printf("%s\n", tempBuffer);
 			        fprintf(output, "%s\n", tempBuffer);    
-					printf("Decrypted Text: %c%c - %c%c\n", decryptedValue,combination[0] ,decrypted2[0],decrypted3[0] );	
+					printf("Decrypted Text: %c- %c%c\n", decryptedValue,combination[0] ,decrypted2[0]);	
 
 				}					
             }
